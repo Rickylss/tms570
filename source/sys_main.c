@@ -70,7 +70,7 @@ int main(void)
 /* USER CODE BEGIN (3) */
     sciTest();
     rtiTest();
-    //vimTest();
+    vimTest();
 
 /* USER CODE END */
 
