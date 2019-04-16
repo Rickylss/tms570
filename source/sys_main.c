@@ -44,6 +44,7 @@
 
 /* USER CODE BEGIN (0) */
 #include "test_sci.h"
+#include "test_rti.h"
 /* USER CODE END */
 
 /* Include Files */
@@ -68,7 +69,7 @@ int main(void)
 {
 /* USER CODE BEGIN (3) */
     sciTest();
-    //rtiTest();
+    rtiTest();
     //vimTest();
 
 /* USER CODE END */
