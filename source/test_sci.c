@@ -30,14 +30,14 @@ void sciNotification(sciBASE_t *sci, uint32 flags)
 }
 
 static void sciTX(void){
-    sciInit();
+    while(1){
     sciDisplayText(sciREG,&TEXT1[0],TSIZE1);
     sciDisplayText(sciREG,&TEXT2[0],TSIZE2);   /* send text code 2 */
     sciDisplayText(sciREG,&TEXT3[0],TSIZE3);   /* send text code 3 */
 }
 
 static void sciRX(void){
-    _enable_interrupt_();                                                   // Enable the IRQ & FIQ
+    _enable_interrupt_();                                                  // Enable the IRQ & FIQ
     sciInit();                                                              // Initialize the SCI driver
     sciSend(sciREG, 21, (unsigned char *)"Please press a key!\r\n");       // Send user prompt
     sciReceive(sciREG, 1,(unsigned char *)&command);                       // Await user character
@@ -48,6 +48,6 @@ void sciTest(void){
 
     sciTX();
 
-    sciRX();
+    //sciRX();
 }
 

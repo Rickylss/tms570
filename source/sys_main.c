@@ -68,8 +68,8 @@
 int main(void)
 {
 /* USER CODE BEGIN (3) */
-    sciTest();
-    rtiTest();
+    //sciTest();
+    //rtiTest();
     vimTest();
 
 /* USER CODE END */
