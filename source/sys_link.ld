@@ -16,8 +16,8 @@ _Min_Heap_Size = 0x400;      /* required amount of heap  */
 /* Specify the memory areas */
 MEMORY
 {
-  VECTORS(rx)     : ORIGIN = 0x00000000, LENGTH = 0x00000020
-  FLASH  (rx)     : ORIGIN = 0x00000020, LENGTH = (0x0017FFE0 + 0x00180000)
+  VECTORS(rx)     : ORIGIN = 0x00000000, LENGTH = 0x00000028
+  FLASH  (rx)     : ORIGIN = 0x00000028, LENGTH = (0x0017FFE0 + 0x00180000)
   CPU_STACK (rw)  : ORIGIN = 0x08000000, LENGTH = 0x00001500 /* Stack is configured in sys_core.asm */
   RAM (xrw)       : ORIGIN = 0x08001500, LENGTH = 0x0003EB00
   MEMORY_B1 (rx)  : ORIGIN = 0x60000000, LENGTH = 0K
@@ -26,6 +26,7 @@ MEMORY
 /* Define output sections */
 SECTIONS
 {
+  stack_top = _estack;
   /* The ISR vector goes first into RAM */
   .intvecs :
   {
@@ -101,7 +102,7 @@ SECTIONS
 
     . = ALIGN(4);
     _edata = .;        /* define a global symbol at data end */
-  } >RAM AT> FLASH
+  } >RAM
 
   /* Uninitialized data section */
   . = ALIGN(4);
@@ -121,6 +122,15 @@ SECTIONS
 
   PROVIDE ( end = _ebss );
   PROVIDE ( _end = _ebss );
+
+  .heap :
+  {
+    . = ALIGN(4);
+    _sheap = .;
+    . = . + _Min_Heap_Size;
+    . = ALIGN(4);
+    _eheap = .;
+  } >RAM
 
   /* MEMORY_bank1 section, code must be located here explicitly            */
   /* Example: extern int foo(void) __attribute__ ((section (".mb1text"))); */

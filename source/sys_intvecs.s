@@ -54,6 +54,7 @@
 @ interrupt vectors
 
 resetEntry:
+        ldr sp, =stack_top
         b   _c_int00
 undefEntry:
         b   undefEntry
